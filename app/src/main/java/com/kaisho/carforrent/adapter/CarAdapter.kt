@@ -44,10 +44,8 @@ class CarAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private var image = view.findViewById<ImageView>(R.id.carItemCarsImage)
         private var name = view.findViewById<TextView>(R.id.carItemCarsNameTView)
         fun bind(carsModel: CarsModel) {
-            image.let { url ->
-                Picasso.with(itemView.context).load(carsModel.image).networkPolicy(
-                    NetworkPolicy.OFFLINE
-                ).into(image)
+            carsModel.image.let { url ->
+                Picasso.with(itemView.context).load(url).into(image)
             }
             name.text = carsModel.name
         }
