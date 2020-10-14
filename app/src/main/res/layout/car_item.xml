@@ -6,6 +6,7 @@
     android:weightSum="2">
     <!--Car's View-->
     <ImageView
+        android:id="@+id/carItemCarsImage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
