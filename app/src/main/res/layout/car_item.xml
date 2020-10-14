@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/audia6white"/>
     <!--Right side Linear-->
     <LinearLayout
@@ -28,6 +28,7 @@
             android:layout_weight="1"
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"
+            android:layout_marginBottom="-10dp"
             android:text="Audi A6 with:\n4 seats | 4 doors"/>
         <!--Images and Utilities's Discripton-->
         <LinearLayout
@@ -85,14 +86,14 @@
                     android:id="@+id/carItemUtilityTViewTwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="6dp"
                     android:text="Manual"
                     android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/carItemUtilityTViewThree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="5dp"
                     android:text="Shuttle Bus"
                     android:textStyle="bold"/>
                 <TextView
