@@ -1,6 +1,5 @@
 package com.kaisho.carforrent.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kaisho.carforrent.R
 import com.kaisho.carforrent.model.CarsModel
-import com.squareup.picasso.Callback
-import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 
 class CarAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -47,7 +43,7 @@ class CarAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             carsModel.image.let { url ->
                 Picasso.with(itemView.context).load(url).into(image)
             }
-            name.text = carsModel.name
+            name.text = "${carsModel.name}\n${carsModel.description}"
         }
     }
 }

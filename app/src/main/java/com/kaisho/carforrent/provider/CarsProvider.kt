@@ -17,6 +17,7 @@ class CarsProvider(val presenter: CarsPresenter) {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                loadList.clear()
                 for (i in snapshot.children){
                     val model = i.getValue(CarsModel::class.java)
                     loadList.add(model!!)
