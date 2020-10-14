@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Shopping Cart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_text">В списке пока нет машин.</string>
+    <string name="try_again_later">Попробуйте пожалуйста позже</string>
 </resources>
