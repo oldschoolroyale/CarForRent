@@ -4,12 +4,13 @@ class CarsModel {
     var name: String? = null
     var image: String? = null
     var description: String? = null
-
-
-    constructor(name: String?, image: String?) {
-        this.name = name
-        this.image = image
-    }
+    var price: Int? = null
 
     constructor()
+    constructor(name: String?, image: String?, description: String?, price: Int?) {
+        this.name = name
+        this.image = image
+        this.description = description
+        this.price = price
+    }
 }

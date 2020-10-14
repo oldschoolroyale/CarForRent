@@ -5,4 +5,6 @@
     <string name="empty_text">В списке пока нет машин.</string>
     <string name="try_again_later">Попробуйте пожалуйста позже</string>
     <string name="favorite_list_empty">Список желаемых пуст</string>
+    <string name="favorite_list">Список желаемых</string>
+    <string name="clear_list">Очистить список</string>
 </resources>

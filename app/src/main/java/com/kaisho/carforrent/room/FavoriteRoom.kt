@@ -1,10 +1,13 @@
 package com.kaisho.carforrent.room
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.kaisho.carforrent.model.FavoritePOJO
 import com.kaisho.carforrent.room.view.FavoriteDao
 
+@Database(entities = [FavoritePOJO::class], version = 1, exportSchema = false)
 abstract class FavoriteRoom : RoomDatabase() {
 
     abstract fun getFavoriteDao(): FavoriteDao
