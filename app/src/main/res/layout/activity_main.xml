@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Shopping Cart"
+        android:text="Cars for Rent"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
