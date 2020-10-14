@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "542315135487",
+    "firebase_url": "https://car-for-rent-424f9.firebaseio.com",
+    "project_id": "car-for-rent-424f9",
+    "storage_bucket": "car-for-rent-424f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542315135487:android:461d2d7223ebd0d55ba7ca",
+        "android_client_info": {
+          "package_name": "com.kaisho.carforrent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542315135487-vfkegal8nk1lgmfnkbh6sj2m8hd691ts.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kaisho.carforrent",
+            "certificate_hash": "b7499974c9807b0c8bb1ba80304cf9315558ecc0"
+          }
+        },
+        {
+          "client_id": "542315135487-mvqdiltvl0ok0fma3jk5br65qd498tgp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADXR0VD1nIzwnMQ-af8NaZN3EhWccdrDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542315135487-mvqdiltvl0ok0fma3jk5br65qd498tgp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
