@@ -91,7 +91,7 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
             localArrayList[position].image!!,
             localArrayList[position].name!!,
             localArrayList[position].description!!,
-            localArrayList[position].price!!
+            0
         ))
         findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
     }

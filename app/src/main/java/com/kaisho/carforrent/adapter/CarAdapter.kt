@@ -1,5 +1,6 @@
 package com.kaisho.carforrent.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,8 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
         private var image = view.findViewById<ImageView>(R.id.carItemCarsImage)
         private var name = view.findViewById<TextView>(R.id.carItemCarsNameTView)
         private var favoriteButton = view.findViewById<Button>(R.id.button1)
+        private var price = view.findViewById<TextView>(R.id.carItemTViewPrice)
+        @SuppressLint("SetTextI18n")
         fun bind(carsModel: CarsModel, carsView: CarsView) {
             carsModel.image.let { url ->
                 Picasso.with(itemView.context).load(url).into(image)
@@ -50,6 +53,7 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
             favoriteButton.setOnClickListener {
                 carsView.favoriteClick(adapterPosition)
             }
+            price.text = "$" + carsModel.price
         }
     }
 }
