@@ -170,11 +170,11 @@
 	</androidx.cardview.widget.CardView>
 	<TextView
 		android:id="@+id/carItemTViewPrice"
-		android:layout_width="100dp"
+		android:layout_width="160dp"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10dp"
 		android:layout_marginStart="10dp"
-		android:text="$149.99"
+		android:text="$149.99/ day"
 		android:textStyle="bold"
 		android:textSize="18sp"
 		android:textColor="@color/black"/>
