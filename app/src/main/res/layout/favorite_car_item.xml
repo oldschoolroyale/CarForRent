@@ -19,8 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/audia6white" />
+            android:layout_marginTop="20dp" />
         <!--Right side Linear-->
         <LinearLayout
             android:layout_width="0dp"
@@ -38,6 +37,10 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="-10dp"
                 android:text="@{favoritePOJO.name}" />
+            <View
+                android:layout_width="match_parent"
+                android:background="#707070"
+                android:layout_height="1dp" />
             <!--Images and Utilities's Discripton-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,28 +60,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:src="@drawable/snowflake" />
+                        android:src="@drawable/ic_snowflake" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:src="@drawable/transmission_manual" />
+                        android:src="@drawable/ic_car_manual_auto" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:src="@drawable/map_tag" />
+                        android:src="@drawable/ic_map_tag" />
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
-                        android:src="@drawable/fuel" />
+                        android:src="@drawable/ic_gas_station" />
                 </LinearLayout>
                 <!--Discription for Utilities-->
                 <LinearLayout
