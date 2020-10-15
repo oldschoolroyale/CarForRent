@@ -12,4 +12,5 @@ interface CarsView: MvpView {
     fun showError(error: String)
     fun loadEmptyList()
     fun loadList(list: ArrayList<CarsModel>)
+    fun favoriteClick(position: Int)
 }

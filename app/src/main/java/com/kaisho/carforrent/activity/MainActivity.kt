@@ -1,9 +1,10 @@
-package com.kaisho.carforrent
+package com.kaisho.carforrent.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.kaisho.carforrent.R
 
 
 class MainActivity : AppCompatActivity() {

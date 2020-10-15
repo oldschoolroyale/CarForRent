@@ -8,6 +8,24 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.kaisho.carforrent.fragments.ListFragment"
-        android:label="fragment_list"
-        tools:layout="@layout/fragment_list" />
+        android:label="Car for rent"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.kaisho.carforrent.fragments.FavoriteFragment"
+        android:label="Список желаемых">
+        <action
+            android:id="@+id/action_favoriteFragment_to_listFragment"
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+    </fragment>
 </navigation>

@@ -74,6 +74,8 @@ dependencies {
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
+    implementation 'jp.wasabeef:recyclerview-animators:4.0.0'
+
 
     //Moxy
     implementation 'tech.schoolhelper:moxy-x:1.7.0'

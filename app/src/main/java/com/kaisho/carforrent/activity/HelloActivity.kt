@@ -1,8 +1,9 @@
-package com.kaisho.carforrent
+package com.kaisho.carforrent.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.kaisho.carforrent.R
 
 class HelloActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
