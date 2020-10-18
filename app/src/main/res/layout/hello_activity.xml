@@ -14,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Cars for Rent"
+        android:text="Let's rent!"
         android:textSize="25sp"
-        android:textStyle="bold"
+        android:textStyle="italic"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="20dp"/>
 
 
     <androidx.cardview.widget.CardView
@@ -27,13 +27,14 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@android:color/white"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="12dp"
         app:cardElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@drawable/corner_layout_line"
             android:padding="16dp">
 
             <TextView
@@ -49,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginBottom="-15dp"
-                android:text="Please enter your name"
+                android:text="Please enter your email"
                 android:textColor="#979CA6"
                 android:textSize="13sp"/>
 
@@ -62,18 +63,28 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="SHOX"
+                    android:hint="Email"
                     android:textColorHint="#CDDC39"
                     android:layout_margin="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnContinue"
+                android:id="@+id/helloActivityBtnEnter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Continue"
-                android:background="#A6543887"
+                android:background="@drawable/roundedbutton"
+                android:text="Enter"
+                android:textColor="#000"
+                android:textStyle="bold"/>
+            <Button
+                android:id="@+id/helloActivityBtnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/roundedbutton"
+                android:text="Register"
+                android:textColor="#000"
                 android:textStyle="bold"/>
 
 

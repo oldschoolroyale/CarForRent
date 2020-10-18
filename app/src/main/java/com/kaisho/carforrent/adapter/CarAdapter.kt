@@ -53,7 +53,7 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
             favoriteButton.setOnClickListener {
                 carsView.favoriteClick(adapterPosition)
             }
-            price.text = "$" + carsModel.price
+            price.text = "$" + carsModel.price + " / day"
         }
     }
 }
