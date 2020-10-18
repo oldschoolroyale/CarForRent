@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Let's rent!"
+        android:text="@string/text_view_app_name"
         android:textSize="25sp"
         android:textStyle="italic"
         android:textColor="@android:color/white"
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Welcome"
+                android:text="@string/text_view_welcome"
                 android:layout_marginTop="5dp"
                 android:textColor="#363A43"
                 android:textSize="30sp"/>
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginBottom="-15dp"
-                android:text="Please enter your email"
+                android:text="@string/text_view_enter_email"
                 android:textColor="#979CA6"
                 android:textSize="13sp"/>
 
@@ -63,7 +63,7 @@
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/edit_text_hint_email"
                     android:textColorHint="#CDDC39"
                     android:layout_margin="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/roundedbutton"
-                android:text="Enter"
+                android:text="@string/button_enter"
                 android:textColor="#000"
                 android:textStyle="bold"/>
             <Button
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/roundedbutton"
-                android:text="Register"
+                android:text="@string/button_register"
                 android:textColor="#000"
                 android:textStyle="bold"/>
 

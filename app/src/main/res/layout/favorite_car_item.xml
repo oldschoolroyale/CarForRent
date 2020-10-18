@@ -7,127 +7,153 @@
             type="com.kaisho.carforrent.model.FavoritePOJO" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="#d6e0f0"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <!--Car's View-->
-        <ImageView
-            android:id="@+id/favoriteCarItemImage"
-            android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+        <androidx.cardview.widget.CardView
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
-        <!--Right side Linear-->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:weightSum="3">
-            <!--Car's Name and Discription-->
-            <TextView
-                android:id="@+id/favoriteCarItemName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="-10dp"
-                android:text="@{favoritePOJO.name}" />
-            <View
-                android:layout_width="match_parent"
-                android:background="#707070"
-                android:layout_height="1dp" />
-            <!--Images and Utilities's Discripton-->
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="#fff0f0f0"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:weightSum="4">
-                <!--Images of Utilities-->
+                android:layout_height="150dp"
+                android:background="@drawable/corner_layout_line"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/favoriteCarItemImage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="7.0dip"
+                    android:layout_weight="1.0" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:weightSum="4">
+                    android:weightSum="3">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
+                    <TextView
+                        android:id="@+id/favoriteCarItemName"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10.0dip"
+                        android:layout_marginTop="2.0dip"
+                        android:layout_marginBottom="-10.0dip"
                         android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_snowflake" />
+                        android:text="@{favoritePOJO.name}"
+                        android:textColor="#30475e"
+                        android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_car_manual_auto" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#707070" />
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_map_tag" />
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="0.0dip"
+                        android:layout_weight="2.0"
+                        android:weightSum="4.0">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_gas_station" />
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1.0"
+                            android:orientation="vertical"
+                            android:weightSum="4.0">
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.0"
+                                android:src="@drawable/ic_snowflake_30475e" />
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.0"
+                                android:src="@drawable/ic_baseline_car_30475e" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.0"
+                                android:src="@drawable/ic_map_tag" />
+
+                            <ImageView
+                                android:layout_width="20.0dip"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.0"
+                                android:src="@drawable/ic_gas_station_30475e" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0.0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="3.0"
+                            android:orientation="vertical"
+                            android:weightSum="4.0">
+
+                            <TextView
+                                android:id="@+id/carItemUtilityTViewOne"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2.0dip"
+                                android:text="@string/text_view_snowflake"
+                                android:textColor="#30475e"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/carItemUtilityTViewTwo"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6.0dip"
+                                android:text="@string/text_view_manual"
+                                android:textColor="#30475e"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/carItemUtilityTViewThree"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5.0dip"
+                                android:text="@string/text_view_shuttle_bus"
+                                android:textColor="#30475e"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/carItemUtilityTViewFour"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6.0dip"
+                                android:text="@string/text_view_full_to_full"
+                                android:textColor="#30475e"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
-                <!--Discription for Utilities-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3"
-                    android:orientation="vertical"
-                    android:weightSum="4">
-
-                    <TextView
-                        android:id="@+id/carItemUtilityTViewOne"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Air Conditioning"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/carItemUtilityTViewTwo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Manual"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/carItemUtilityTViewThree"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Shuttle Bus"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/carItemUtilityTViewFour"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Full to Full"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
-        </LinearLayout>
-
-    </LinearLayout>
 </layout>
