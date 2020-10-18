@@ -24,4 +24,5 @@
     <string name="sort_by">Сортировать по</string>
     <string name="high_to_low">По убыванию</string>
     <string name="low_to_high">По возрастанию</string>
+    <string name="check_rent_label">Check Rent</string>
 </resources>

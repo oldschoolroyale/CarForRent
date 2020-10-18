@@ -46,8 +46,13 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
     private class CarsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var image = view.findViewById<ImageView>(R.id.carItemCarsImage)
         private var name = view.findViewById<TextView>(R.id.carItemCarsNameTView)
-        private var favoriteButton = view.findViewById<Button>(R.id.button1)
+        private var favoriteButton = view.findViewById<Button>(R.id.carItemButtonAddToFavorite)
         private var price = view.findViewById<TextView>(R.id.carItemTViewPrice)
+        private var checkRentClick = view.findViewById<Button>(R.id.carItemButtonCheckCart)
+        private var airCondition = view.findViewById<TextView>(R.id.carItemTViewAirCondition)
+        private var manual = view.findViewById<TextView>(R.id.carItemTViewManual)
+        private var mapTagText = view.findViewById<TextView>(R.id.carItemTViewMapTag)
+        private var gasStation = view.findViewById<TextView>(R.id.carItemTViewGasStation)
         @SuppressLint("SetTextI18n")
         fun bind(carsModel: CarsModel, carsView: CarsView) {
             carsModel.image.let { url ->
@@ -57,8 +62,17 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
             favoriteButton.setOnClickListener {
                 carsView.favoriteClick(adapterPosition)
             }
+            checkRentClick.setOnClickListener {
+                carsView.checkRentClick(adapterPosition)
+            }
+            manual.text = carsModel.manual
+            mapTagText.text = carsModel.mapTag
 
+
+            gasStation.text = carsModel.gasStation
+            airCondition.text = carsModel.airCondition
             price.text = "$" + carsModel.price + " / day"
         }
     }
+
 }

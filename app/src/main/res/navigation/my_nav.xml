@@ -17,6 +17,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_listFragment_to_checkRentFragment"
+            app:destination="@id/checkRentFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -27,5 +34,19 @@
             app:destination="@id/listFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkRentFragment"
+        android:name="com.kaisho.carforrent.fragments.CheckRentFragment"
+        android:label="@string/check_rent_label"
+        tools:layout="@layout/fragment_check_rent">
+        <action
+            android:id="@+id/action_checkRentFragment_to_listFragment"
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
+        <argument
+            android:name="carItem"
+            app:argType="com.kaisho.carforrent.model.CarsModel" />
     </fragment>
 </navigation>

@@ -3,7 +3,6 @@ package com.kaisho.carforrent.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -94,6 +93,19 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
     }
 
+    override fun checkRentClick(position: Int) {
+        val model = CarsModel()
+        model.name = localArrayList[position].name
+        model.description = localArrayList[position].description
+        model.image = localArrayList[position].image
+        model.price = localArrayList[position].price
+        model.airCondition = localArrayList[position].airCondition
+        model.manual = localArrayList[position].manual
+        model.mapTag = localArrayList[position].mapTag
+        model.gasStation = localArrayList[position].gasStation
+        findNavController().navigate(ListFragmentDirections.actionListFragmentToCheckRentFragment(model))
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_menu, menu)
     }
@@ -102,11 +114,11 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         when(item.itemId){
             R.id.list_menu_favorite -> findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
             R.id.list_menu_price_high ->{
-                Collections.sort(localArrayList, CarsModel().highToLow)
+                //Collections.sort(localArrayList, CarsModel().highToLow)
                 loadList(localArrayList)
             }
             R.id.list_menu_price_low ->{
-                Collections.sort(localArrayList, CarsModel().lowToHigh)
+                //Collections.sort(localArrayList, CarsModel().lowToHigh)
                 loadList(localArrayList)
             }
         }

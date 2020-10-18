@@ -1,18 +1,25 @@
 package com.kaisho.carforrent.model
 
-class CarsModel : Comparable<CarsModel> {
-    var name: String? = null
-    var image: String? = null
-    var description: String? = null
-    var price: Int? = null
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-    constructor()
-    constructor(name: String?, image: String?, description: String?, price: Int?) {
-        this.name = name
-        this.image = image
-        this.description = description
-        this.price = price
-    }
+
+@Parcelize
+data class CarsModel(
+    var name: String? = null,
+    var image: String? = null,
+    var description: String? = null,
+    var price: Int? = null,
+    var airCondition: String? = null,
+    var manual: String? = null,
+    var mapTag: String? = null,
+    var gasStation: String? = null
+) : Comparable<CarsModel>, Parcelable {
+
+
+
+
+
 
     override fun compareTo(other: CarsModel): Int {
         return this.price!! - other.price!!

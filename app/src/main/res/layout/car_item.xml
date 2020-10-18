@@ -112,7 +112,7 @@
 						android:weightSum="4.0">
 
 						<TextView
-							android:id="@id/carItemUtilityTViewFour"
+							android:id="@+id/carItemTViewAirCondition"
 							android:layout_width="fill_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="2.0dip"
@@ -121,7 +121,7 @@
 							android:textStyle="bold" />
 
 						<TextView
-							android:id="@id/carItemUtilityTViewFour"
+							android:id="@+id/carItemTViewManual"
 							android:layout_width="fill_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="6.0dip"
@@ -130,7 +130,7 @@
 							android:textStyle="bold" />
 
 						<TextView
-							android:id="@id/carItemUtilityTViewFour"
+							android:id="@+id/carItemTViewMapTag"
 							android:layout_width="fill_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="5.0dip"
@@ -139,7 +139,7 @@
 							android:textStyle="bold" />
 
 						<TextView
-							android:id="@id/carItemUtilityTViewFour"
+							android:id="@+id/carItemTViewGasStation"
 							android:layout_width="fill_parent"
 							android:layout_height="wrap_content"
 							android:layout_marginTop="6.0dip"
@@ -160,7 +160,7 @@
 			android:weightSum="2.0">
 			<!--android:textColor="#5E5E5E"-->
 			<Button
-				android:id="@+id/button1"
+				android:id="@+id/carItemButtonAddToFavorite"
 				android:background="@drawable/roundedbutton"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
 				android:drawableStart="@drawable/ic_baseline_favorite_30475e"
 				android:layout_weight="1"/>
 			<Button
-				android:id="@+id/button2"
+				android:id="@+id/carItemButtonCheckCart"
 				android:background="@drawable/roundedbutton"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
