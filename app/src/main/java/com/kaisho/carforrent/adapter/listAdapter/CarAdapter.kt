@@ -1,4 +1,4 @@
-package com.kaisho.carforrent.adapter
+package com.kaisho.carforrent.adapter.listAdapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -16,6 +16,10 @@ import com.squareup.picasso.Picasso
 class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val carsArrayList: ArrayList<CarsModel> = ArrayList()
+
+    fun filter(text: String){
+
+    }
 
     fun newCars(newCarsArrayList: ArrayList<CarsModel>) {
         carsArrayList.clear()
@@ -53,6 +57,7 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
             favoriteButton.setOnClickListener {
                 carsView.favoriteClick(adapterPosition)
             }
+
             price.text = "$" + carsModel.price + " / day"
         }
     }

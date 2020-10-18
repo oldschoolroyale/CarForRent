@@ -2,10 +2,9 @@ package com.kaisho.carforrent.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,14 +13,14 @@ import com.agrawalsuneet.dotsloader.loaders.LazyLoader
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kaisho.carforrent.R
-import com.kaisho.carforrent.adapter.CarAdapter
+import com.kaisho.carforrent.adapter.listAdapter.CarAdapter
 import com.kaisho.carforrent.model.CarsModel
 import com.kaisho.carforrent.model.FavoritePOJO
 import com.kaisho.carforrent.presenter.CarsPresenter
 import com.kaisho.carforrent.room.viewModel.FavoriteViewModel
 import com.kaisho.carforrent.view.CarsView
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import java.util.zip.Inflater
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListFragment : MvpAppCompatFragment(), CarsView{
 
@@ -81,8 +80,7 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
     override fun loadList(list: ArrayList<CarsModel>) {
         recyclerView.visibility = View.VISIBLE
         adapter.newCars(list)
-        localArrayList.clear()
-        localArrayList.addAll(list)
+        this.localArrayList = list
     }
 
     override fun favoriteClick(position: Int) {
@@ -101,9 +99,18 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.list_menu_favorite){
-            findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
+        when(item.itemId){
+            R.id.list_menu_favorite -> findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
+            R.id.list_menu_price_high ->{
+                Collections.sort(localArrayList, CarsModel().highToLow)
+                loadList(localArrayList)
+            }
+            R.id.list_menu_price_low ->{
+                Collections.sort(localArrayList, CarsModel().lowToHigh)
+                loadList(localArrayList)
+            }
         }
+
         return super.onOptionsItemSelected(item)
     }
 }

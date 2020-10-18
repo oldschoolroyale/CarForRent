@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.kaisho.carforrent.fragments.FavoriteFragment"
-        android:label="Список желаемых">
+        android:label="@string/favorite_list">
         <action
             android:id="@+id/action_favoriteFragment_to_listFragment"
             app:destination="@id/listFragment"

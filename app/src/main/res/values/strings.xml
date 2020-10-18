@@ -21,4 +21,7 @@
     <string name="edit_text_hint_email">Email</string>
     <string name="button_enter">Enter</string>
     <string name="button_register">Register</string>
+    <string name="sort_by">Сортировать по</string>
+    <string name="high_to_low">По убыванию</string>
+    <string name="low_to_high">По возрастанию</string>
 </resources>

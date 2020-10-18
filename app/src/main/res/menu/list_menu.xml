@@ -6,4 +6,18 @@
         android:title="@string/favorite_list"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_favorite_white"/>
+    
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/list_menu_sortBy"
+            android:title="@string/sort_by">
+            <menu>
+                <item
+                    android:id="@+id/list_menu_price_high"
+                    android:title="@string/high_to_low"/>
+                <item android:id="@+id/list_menu_price_low"
+                    android:title="@string/low_to_high"/>
+            </menu>
+        </item>
+    </group>
 </menu>
