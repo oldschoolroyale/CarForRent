@@ -24,7 +24,7 @@ class CheckRentFragment : Fragment() {
         args.carItem.image.let { url ->
             Picasso.with(context).load(url).into(view.fragmentCheckRentImage)
         }
-        view.fragmentCheckRentName.text = "${args.carItem.name}\n${args.carItem.description}\n${args.carItem.manual}\n${args.carItem.mapTag}\n${args.carItem.gasStation}"
+        view.fragmentCheckRentName.text = "${args.carItem.name}\n${args.carItem.description}\n${args.carItem.manual}\n${args.carItem.passengers}\n${args.carItem.gasStation}"
         return view
     }
 }

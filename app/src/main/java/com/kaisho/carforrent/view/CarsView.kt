@@ -13,5 +13,4 @@ interface CarsView: MvpView {
     fun loadEmptyList()
     fun loadList(list: ArrayList<CarsModel>)
     fun favoriteClick(position: Int)
-    fun checkRentClick(position: Int)
 }

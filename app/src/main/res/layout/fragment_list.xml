@@ -1,57 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ListFragment">
-
-
-   <androidx.recyclerview.widget.RecyclerView
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/fragmentListRecyclerView" />
-
-    <com.agrawalsuneet.dotsloader.loaders.LazyLoader
-        android:id="@+id/fragmentListLoader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        app:lazyloader_dotsDist="10dp"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
-        app:lazyloader_dotsRadius="7dp"
-        app:lazyloader_firstDelayDur="150"
-        app:lazyloader_firstDotColor="@android:color/holo_red_dark"
-        app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
-        app:lazyloader_secondDelayDur="300"
-        app:lazyloader_secondDotColor="@color/blue"
-        app:lazyloader_thirdDotColor="@color/yellow"/>
-
-    <LinearLayout
+    tools:context=".fragments.ListFragment"
+    android:background="#d6e0f0">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/fragmentListEmpty"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="128dp"
-            android:layout_height="128dp"
-            android:src="@drawable/ic_car_manual_auto"/>
-        <TextView
+        >
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="@string/empty_text"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="@string/try_again_later"
-            android:textSize="15sp"/>
-    </LinearLayout>
+            android:layout_height="90dp"
+            app:cardCornerRadius="8dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/fragmentListCardView">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="5">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="From \n20 Oct 2020"
+                    android:textSize="15sp"
+                    android:id="@+id/fragmentListFromTextView"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="5dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorAccent"
+                        android:padding="8dp">
+                        <TextView
+                            android:id="@+id/fragmentListTotalDaysTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="8 days"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="15sp"/>
+                    </RelativeLayout>
 
-</RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="15sp"
+                    android:text="Until\n27 Oct 2020"
+                    android:id="@+id/fragmentListUntilTextView"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/fragmentListAnimButtonSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_below="@+id/fragmentListCardView"
+            style="button"
+            android:text="@string/search"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            app:spinning_bar_width="4dp"
+            app:spinning_bar_color="#FFF"
+            android:background="@drawable/button_shape_blue"
+            app:spinning_bar_padding="6dp"
+            android:layout_marginTop="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragmentListRecyclerView"
+            android:layout_below="@id/fragmentListAnimButtonSearch"/>
+
+        <com.agrawalsuneet.dotsloader.loaders.LazyLoader
+            android:id="@+id/fragmentListLoader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            app:lazyloader_dotsDist="10dp"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            app:lazyloader_dotsRadius="7dp"
+            app:lazyloader_firstDelayDur="150"
+            app:lazyloader_firstDotColor="@android:color/holo_red_dark"
+            app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
+            app:lazyloader_secondDelayDur="300"
+            app:lazyloader_secondDotColor="@color/blue"
+            app:lazyloader_thirdDotColor="@color/yellow"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/fragmentListEmpty"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:src="@drawable/ic_car_manual_auto"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/empty_text"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/try_again_later"
+                android:textSize="15sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+</androidx.core.widget.NestedScrollView>

@@ -1,23 +1,33 @@
 package com.kaisho.carforrent.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.util.Pair
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.agrawalsuneet.dotsloader.loaders.LazyLoader
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.kaisho.carforrent.R
 import com.kaisho.carforrent.adapter.listAdapter.CarAdapter
 import com.kaisho.carforrent.model.CarsModel
 import com.kaisho.carforrent.model.FavoritePOJO
 import com.kaisho.carforrent.presenter.CarsPresenter
 import com.kaisho.carforrent.room.viewModel.FavoriteViewModel
+import com.kaisho.carforrent.room.viewModel.SharedViewModel
 import com.kaisho.carforrent.view.CarsView
+import kotlinx.android.synthetic.main.fragment_list.*
+import kotlinx.android.synthetic.main.fragment_list.view.*
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,6 +36,7 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
 
     //viewModels
     private val favoriteViewModel: FavoriteViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     //local ArrayList
     private var localArrayList: ArrayList<CarsModel> = ArrayList()
@@ -44,14 +55,37 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
-
-
         recyclerView = view.findViewById(R.id.fragmentListRecyclerView)
         loader = view.findViewById(R.id.fragmentListLoader)
         emptyList = view.findViewById(R.id.fragmentListEmpty)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.isFocusable = false
+        recyclerView.isNestedScrollingEnabled = false
+
+        val materialDatePicker = sharedViewModel.datePicker().build()
+
+        view.fragmentListCardView.setOnClickListener {
+            materialDatePicker.show(requireFragmentManager(), "DATE_PICKER")
+        }
+
+        materialDatePicker.addOnPositiveButtonClickListener {
+            val model = it.toString().split(" ")
+            sharedViewModel.datePick(model)
+        }
+
+        val dateFromLiveData : LiveData<String> = sharedViewModel.getDateFrom()
+
+        dateFromLiveData.observe(requireActivity(), androidx.lifecycle.Observer {
+            val date = it.split(" ")
+            view.fragmentListFromTextView.text = "From \n${date[0]}"
+            view.fragmentListUntilTextView.text = "Until \n${date[1]}"
+        })
+
+
+
+
 
         setHasOptionsMenu(true)
         presenter.load()
@@ -91,19 +125,6 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
             0
         ))
         findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
-    }
-
-    override fun checkRentClick(position: Int) {
-        val model = CarsModel()
-        model.name = localArrayList[position].name
-        model.description = localArrayList[position].description
-        model.image = localArrayList[position].image
-        model.price = localArrayList[position].price
-        model.airCondition = localArrayList[position].airCondition
-        model.manual = localArrayList[position].manual
-        model.mapTag = localArrayList[position].mapTag
-        model.gasStation = localArrayList[position].gasStation
-        findNavController().navigate(ListFragmentDirections.actionListFragmentToCheckRentFragment(model))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
