@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import io.reactivex.Completable
 import io.reactivex.Single
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,7 +30,6 @@ class ListViewModel : ViewModel() {
         val constraintBuilder = CalendarConstraints.Builder()
         constraintBuilder.setValidator(DateValidatorPointForward.now())
 
-
         val builder : MaterialDatePicker.Builder<Pair<Long, Long>> = MaterialDatePicker.Builder.dateRangePicker()
         builder.setTitleText("SELECT A DATE")
         builder.setCalendarConstraints(constraintBuilder.build())
@@ -37,8 +37,8 @@ class ListViewModel : ViewModel() {
         return builder
     }
 
-    fun calculate(model: List<String>) {
-        val single = Single().create{ subscriber ->
+    fun calculate(model: List<String>) : Single<Int>{
+        return Single.create{ subscriber ->
             var count = 0
             val s1 = Date(model[0].substring(5, model[0].length).toLong())
             val s2 = Date(model[1].substring(0, model[1].length -1).toLong())
@@ -53,10 +53,13 @@ class ListViewModel : ViewModel() {
                 calendarFrom.add(Calendar.DATE, 1)
             }
             daysInt = count
-            daysList.value = daysInt
             subscriber.onSuccess(count)
         }
 
+    }
+
+    fun setDateToList(){
+        daysList.value = daysInt
     }
 
     fun datePick(model: List<String>){

@@ -1,6 +1,7 @@
 package com.kaisho.carforrent.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -23,6 +24,7 @@ import com.kaisho.carforrent.viewModel.FavoriteViewModel
 import com.kaisho.carforrent.viewModel.ListViewModel
 import com.kaisho.carforrent.viewModel.SharedViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_list.view.*
@@ -38,6 +40,8 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
 
     //local ArrayList
     private var localArrayList: ArrayList<CarsModel> = ArrayList()
+
+    private var compositeDisposable = CompositeDisposable()
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var loader: CircularProgressButton
@@ -74,7 +78,7 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         materialDatePicker.addOnPositiveButtonClickListener {
             val model = it.toString().split(" ")
             listViewModel.datePick(model)
-            //subscribeOnTotalCount(view, model)
+            subscribeOnTotalCount( model)
         }
 
         val dateFromLiveData : LiveData<String> = listViewModel.getDateFrom()
@@ -97,15 +101,16 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         return view
     }
 
-    private fun subscribeOnTotalCount(view: View, model: List<String>) {
-        /*val dispose = listViewModel.calculate(model)
+    private fun subscribeOnTotalCount(model: List<String>) {
+        compositeDisposable.add(listViewModel.calculate(model)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
+                listViewModel.setDateToList()
+                Log.d("MyLog", "Days RxJava OnComplete")
             },{
-
-            })*/
+                Log.d("MyLog", "Rx $it")
+            }))
     }
 
     override fun startLoading() {
@@ -161,5 +166,10 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        compositeDisposable.dispose()
     }
 }
