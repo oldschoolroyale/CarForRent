@@ -108,7 +108,9 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
             .subscribe({
                 listViewModel.setDateToList()
                 Log.d("MyLog", "Days RxJava OnComplete")
+
             },{
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 Log.d("MyLog", "Rx $it")
             }))
     }

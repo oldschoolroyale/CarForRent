@@ -100,7 +100,7 @@
             android:id="@+id/fragmentListEmpty"
             android:gravity="center"
             android:layout_below="@id/fragmentListAnimButtonSearch"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
             <ImageView
                 android:layout_width="128dp"
                 android:layout_height="128dp"
