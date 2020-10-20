@@ -8,9 +8,9 @@ import com.kaisho.carforrent.view.CarsView
 
 @InjectViewState
 class CarsPresenter : MvpPresenter<CarsView>(){
-    fun load(){
+    fun load(days: Int){
         viewState.startLoading()
-        CarsProvider(this).parse()
+        CarsProvider(this).parse(days)
     }
     fun error(error: String){
         viewState.endLoading()

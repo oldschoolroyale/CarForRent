@@ -8,7 +8,7 @@ import com.kaisho.carforrent.model.CarsModel
 import com.kaisho.carforrent.presenter.CarsPresenter
 
 class CarsProvider(val presenter: CarsPresenter) {
-    fun parse(){
+    fun parse(days: Int){
         val loadList: ArrayList<CarsModel> = ArrayList()
         val reference = FirebaseDatabase.getInstance().reference.child("Cars")
         reference.addValueEventListener(object : ValueEventListener{
@@ -20,6 +20,7 @@ class CarsProvider(val presenter: CarsPresenter) {
                 loadList.clear()
                 for (i in snapshot.children){
                     val model = i.getValue(CarsModel::class.java)
+                    model!!.totalPrice = "$" + "${(model.price!! * days)} / ${days}days"
                     loadList.add(model!!)
                 }
                 presenter.tryToSetUp(loadList)

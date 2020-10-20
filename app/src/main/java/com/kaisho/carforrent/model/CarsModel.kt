@@ -14,7 +14,8 @@ data class CarsModel(
     var airCondition: String? = null,
     var manual: String? = null,
     var passengers: String? = null,
-    var gasStation: String? = null
+    var gasStation: String? = null,
+    var totalPrice: String? = null
 ) : Comparable<CarsModel>, Parcelable {
 
 

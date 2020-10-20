@@ -1,48 +1,46 @@
 package com.kaisho.carforrent.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.util.Pair
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.agrawalsuneet.dotsloader.loaders.LazyLoader
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.google.android.material.datepicker.CalendarConstraints
-import com.google.android.material.datepicker.DateValidatorPointForward
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.kaisho.carforrent.R
 import com.kaisho.carforrent.adapter.listAdapter.CarAdapter
 import com.kaisho.carforrent.model.CarsModel
 import com.kaisho.carforrent.model.FavoritePOJO
 import com.kaisho.carforrent.presenter.CarsPresenter
-import com.kaisho.carforrent.room.viewModel.FavoriteViewModel
-import com.kaisho.carforrent.room.viewModel.SharedViewModel
 import com.kaisho.carforrent.view.CarsView
-import kotlinx.android.synthetic.main.fragment_list.*
+import com.kaisho.carforrent.viewModel.FavoriteViewModel
+import com.kaisho.carforrent.viewModel.ListViewModel
+import com.kaisho.carforrent.viewModel.SharedViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_list.view.*
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+
 
 class ListFragment : MvpAppCompatFragment(), CarsView{
 
 
     //viewModels
     private val favoriteViewModel: FavoriteViewModel by viewModels()
-    private val sharedViewModel: SharedViewModel by viewModels()
+    //private val sharedViewModel: SharedViewModel by viewModels()
+    private val listViewModel: ListViewModel by viewModels()
 
     //local ArrayList
     private var localArrayList: ArrayList<CarsModel> = ArrayList()
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var loader: LazyLoader
+    private lateinit var loader: CircularProgressButton
     private lateinit var emptyList: LinearLayout
     private var adapter = CarAdapter(this)
 
@@ -56,15 +54,18 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
         recyclerView = view.findViewById(R.id.fragmentListRecyclerView)
-        loader = view.findViewById(R.id.fragmentListLoader)
+        loader = view.findViewById(R.id.fragmentListAnimButtonSearch)
         emptyList = view.findViewById(R.id.fragmentListEmpty)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.itemAnimator = SlideInUpAnimator().apply {
+            addDuration = 300
+        }
         recyclerView.isFocusable = false
         recyclerView.isNestedScrollingEnabled = false
 
-        val materialDatePicker = sharedViewModel.datePicker().build()
+        val materialDatePicker = listViewModel.datePicker().build()
 
         view.fragmentListCardView.setOnClickListener {
             materialDatePicker.show(requireFragmentManager(), "DATE_PICKER")
@@ -72,34 +73,49 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
 
         materialDatePicker.addOnPositiveButtonClickListener {
             val model = it.toString().split(" ")
-            sharedViewModel.datePick(model)
+            listViewModel.datePick(model)
+            //subscribeOnTotalCount(view, model)
         }
 
-        val dateFromLiveData : LiveData<String> = sharedViewModel.getDateFrom()
+        val dateFromLiveData : LiveData<String> = listViewModel.getDateFrom()
+        val daysIntList: LiveData<Int> = listViewModel.getDaysInt()
 
-        dateFromLiveData.observe(requireActivity(), androidx.lifecycle.Observer {
+        dateFromLiveData.observe(requireActivity(), Observer {
             val date = it.split(" ")
             view.fragmentListFromTextView.text = "From \n${date[0]}"
             view.fragmentListUntilTextView.text = "Until \n${date[1]}"
         })
-
-
-
-
+        daysIntList.observe(requireActivity(), Observer {
+            view.fragmentListTotalDaysTextView.text = "$it days"
+        })
 
         setHasOptionsMenu(true)
-        presenter.load()
+        loader.setOnClickListener {
+            presenter.load(listViewModel.daysInt)
+
+        }
         return view
     }
 
+    private fun subscribeOnTotalCount(view: View, model: List<String>) {
+        /*val dispose = listViewModel.calculate(model)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{
+
+            })*/
+    }
+
     override fun startLoading() {
-        loader.visibility = View.VISIBLE
+        loader.startAnimation()
         recyclerView.visibility = View.INVISIBLE
         emptyList.visibility = View.INVISIBLE
     }
 
     override fun endLoading() {
-        loader.visibility = View.INVISIBLE
+        loader.revertAnimation()
     }
 
     override fun showError(error: String) {

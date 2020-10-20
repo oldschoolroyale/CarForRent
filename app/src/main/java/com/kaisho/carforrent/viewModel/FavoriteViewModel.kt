@@ -1,4 +1,4 @@
-package com.kaisho.carforrent.room.viewModel
+package com.kaisho.carforrent.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

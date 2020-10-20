@@ -15,9 +15,8 @@ import com.kaisho.carforrent.adapter.FavoriteAdapter
 import com.kaisho.carforrent.adapter.SwipeToDelete
 import com.kaisho.carforrent.databinding.FragmentFavoriteBinding
 import com.kaisho.carforrent.model.FavoritePOJO
-import com.kaisho.carforrent.room.viewModel.FavoriteViewModel
-import com.kaisho.carforrent.room.viewModel.SharedViewModel
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator
+import com.kaisho.carforrent.viewModel.FavoriteViewModel
+import com.kaisho.carforrent.viewModel.SharedViewModel
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 

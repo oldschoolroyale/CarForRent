@@ -2,7 +2,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ListFragment"
     android:background="#d6e0f0">
@@ -47,7 +47,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="8 days"
+                            android:text="0 days"
                             android:gravity="center"
                             android:textColor="@android:color/white"
                             android:textSize="15sp"/>
@@ -75,6 +75,7 @@
             android:layout_marginEnd="15dp"
             android:layout_below="@+id/fragmentListCardView"
             style="button"
+            android:layout_centerHorizontal="true"
             android:text="@string/search"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
@@ -88,30 +89,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/fragmentListRecyclerView"
-            android:layout_below="@id/fragmentListAnimButtonSearch"/>
+            android:layout_below="@id/fragmentListAnimButtonSearch"
+            android:layout_marginTop="10dp"/>
 
-        <com.agrawalsuneet.dotsloader.loaders.LazyLoader
-            android:id="@+id/fragmentListLoader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            app:lazyloader_dotsDist="10dp"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-            app:lazyloader_dotsRadius="7dp"
-            app:lazyloader_firstDelayDur="150"
-            app:lazyloader_firstDotColor="@android:color/holo_red_dark"
-            app:lazyloader_interpolator="@android:anim/decelerate_interpolator"
-            app:lazyloader_secondDelayDur="300"
-            app:lazyloader_secondDotColor="@color/blue"
-            app:lazyloader_thirdDotColor="@color/yellow"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/fragmentListEmpty"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_below="@id/fragmentListAnimButtonSearch"
+            android:layout_marginTop="10dp">
             <ImageView
                 android:layout_width="128dp"
                 android:layout_height="128dp"
