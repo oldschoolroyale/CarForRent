@@ -1,17 +1,14 @@
 package com.kaisho.carforrent.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+import com.agrawalsuneet.dotsloader.loaders.LazyLoader
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kaisho.carforrent.R
@@ -19,32 +16,22 @@ import com.kaisho.carforrent.adapter.listAdapter.CarAdapter
 import com.kaisho.carforrent.model.CarsModel
 import com.kaisho.carforrent.model.FavoritePOJO
 import com.kaisho.carforrent.presenter.CarsPresenter
+import com.kaisho.carforrent.room.viewModel.FavoriteViewModel
 import com.kaisho.carforrent.view.CarsView
-import com.kaisho.carforrent.viewModel.FavoriteViewModel
-import com.kaisho.carforrent.viewModel.ListViewModel
-import com.kaisho.carforrent.viewModel.SharedViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.fragment_list.view.*
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListFragment : MvpAppCompatFragment(), CarsView{
 
 
     //viewModels
     private val favoriteViewModel: FavoriteViewModel by viewModels()
-    //private val sharedViewModel: SharedViewModel by viewModels()
-    private val listViewModel: ListViewModel by viewModels()
 
     //local ArrayList
     private var localArrayList: ArrayList<CarsModel> = ArrayList()
 
-    private var compositeDisposable = CompositeDisposable()
-
     private lateinit var recyclerView: RecyclerView
-    private lateinit var loader: CircularProgressButton
+    private lateinit var loader: LazyLoader
     private lateinit var emptyList: LinearLayout
     private var adapter = CarAdapter(this)
 
@@ -57,70 +44,28 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_list, container, false)
 
+
+
         recyclerView = view.findViewById(R.id.fragmentListRecyclerView)
-        loader = view.findViewById(R.id.fragmentListAnimButtonSearch)
+        loader = view.findViewById(R.id.fragmentListLoader)
         emptyList = view.findViewById(R.id.fragmentListEmpty)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
-        recyclerView.itemAnimator = SlideInUpAnimator().apply {
-            addDuration = 300
-        }
-        recyclerView.isFocusable = false
-        recyclerView.isNestedScrollingEnabled = false
-
-        val materialDatePicker = listViewModel.datePicker().build()
-
-        view.fragmentListCardView.setOnClickListener {
-            materialDatePicker.show(requireFragmentManager(), "DATE_PICKER")
-        }
-
-        materialDatePicker.addOnPositiveButtonClickListener {
-            val model = it.toString().split(" ")
-            listViewModel.datePick(model)
-            subscribeOnTotalCount( model)
-        }
-
-        val dateFromLiveData : LiveData<String> = listViewModel.getDateFrom()
-        val daysIntList: LiveData<Int> = listViewModel.getDaysInt()
-
-        dateFromLiveData.observe(requireActivity(), Observer {
-            val date = it.split(" ")
-            view.fragmentListFromTextView.text = "From \n${date[0]}"
-            view.fragmentListUntilTextView.text = "Until \n${date[1]}"
-        })
-        daysIntList.observe(requireActivity(), Observer {
-            view.fragmentListTotalDaysTextView.text = "$it days"
-        })
 
         setHasOptionsMenu(true)
-        loader.setOnClickListener {
-            presenter.load(listViewModel.daysInt)
-
-        }
+        presenter.load()
         return view
     }
 
-    private fun subscribeOnTotalCount(model: List<String>) {
-        compositeDisposable.add(listViewModel.calculate(model)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                listViewModel.setDateToList()
-                Log.d("MyLog", "Days RxJava OnComplete")
-            },{
-                Log.d("MyLog", "Rx $it")
-            }))
-    }
-
     override fun startLoading() {
-        loader.startAnimation()
+        loader.visibility = View.VISIBLE
         recyclerView.visibility = View.INVISIBLE
         emptyList.visibility = View.INVISIBLE
     }
 
     override fun endLoading() {
-        loader.revertAnimation()
+        loader.visibility = View.INVISIBLE
     }
 
     override fun showError(error: String) {
@@ -148,6 +93,19 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         findNavController().navigate(R.id.action_listFragment_to_favoriteFragment)
     }
 
+    override fun checkRentClick(position: Int) {
+        val model = CarsModel()
+        model.name = localArrayList[position].name
+        model.description = localArrayList[position].description
+        model.image = localArrayList[position].image
+        model.price = localArrayList[position].price
+        model.airCondition = localArrayList[position].airCondition
+        model.manual = localArrayList[position].manual
+        model.mapTag = localArrayList[position].mapTag
+        model.gasStation = localArrayList[position].gasStation
+        findNavController().navigate(ListFragmentDirections.actionListFragmentToCheckRentFragment(model))
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.list_menu, menu)
     }
@@ -166,10 +124,5 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        compositeDisposable.dispose()
     }
 }

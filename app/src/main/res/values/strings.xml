@@ -11,7 +11,7 @@
     <string name="text_view_cars_name">Audi A6 with:\n 4 seats | 4 doors</string>
     <string name="text_view_snowflake">Air Conditioning</string>
     <string name="text_view_manual">Manual</string>
-    <string name="text_view_shuttle_bus">Shuttle Bus</string>
+    <string name="text_view_passengers">Passengers</string>
     <string name="text_view_full_to_full">Full to Full</string>
     <string name="button_favorite">Add to Favorite</string>
     <string name="buton_cart">Check cart</string>
