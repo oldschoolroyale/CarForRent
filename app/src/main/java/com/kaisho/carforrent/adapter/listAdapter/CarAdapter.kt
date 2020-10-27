@@ -1,15 +1,25 @@
 package com.kaisho.carforrent.adapter.listAdapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.kaisho.carforrent.databinding.CarItemBinding
+import com.kaisho.carforrent.R
 import com.kaisho.carforrent.model.CarsModel
 import com.kaisho.carforrent.view.CarsView
+import com.squareup.picasso.Picasso
 
 class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val carsArrayList: ArrayList<CarsModel> = ArrayList()
+
+    fun filter(text: String){
+
+    }
 
     fun newCars(newCarsArrayList: ArrayList<CarsModel>) {
         carsArrayList.clear()
@@ -18,7 +28,9 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CarsViewHolder.from(parent)
+        return CarsViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.car_item, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -31,20 +43,35 @@ class CarAdapter(var carsView: CarsView): RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    private class CarsViewHolder(private val binding: CarItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(carsModel: CarsModel, carsView: CarsView){
-            binding.carModel = carsModel
-            binding.carItemButtonAddToFavorite.setOnClickListener {
+    private class CarsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private var image = view.findViewById<ImageView>(R.id.carItemCarsImage)
+        private var name = view.findViewById<TextView>(R.id.carItemCarsNameTView)
+        private var favoriteButton = view.findViewById<Button>(R.id.carItemButtonAddToFavorite)
+        private var price = view.findViewById<TextView>(R.id.carItemTViewPrice)
+        private var checkRentClick = view.findViewById<Button>(R.id.carItemButtonCheckCart)
+        private var airCondition = view.findViewById<TextView>(R.id.carItemTViewAirCondition)
+        private var manual = view.findViewById<TextView>(R.id.carItemTViewManual)
+        private var mapTagText = view.findViewById<TextView>(R.id.carItemTViewMapTag)
+        private var gasStation = view.findViewById<TextView>(R.id.carItemTViewGasStation)
+        @SuppressLint("SetTextI18n")
+        fun bind(carsModel: CarsModel, carsView: CarsView) {
+            carsModel.image.let { url ->
+                Picasso.with(itemView.context).load(url).into(image)
+            }
+            name.text = "${carsModel.name}\n${carsModel.description}"
+            favoriteButton.setOnClickListener {
                 carsView.favoriteClick(adapterPosition)
             }
-            binding.executePendingBindings()
-        }
-        companion object{
-            fun from(parent: ViewGroup): CarsViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = CarItemBinding.inflate(layoutInflater, parent, false)
-                return CarsViewHolder(binding)
+            checkRentClick.setOnClickListener {
+                carsView.checkRentClick(adapterPosition)
             }
+            manual.text = carsModel.manual
+            mapTagText.text = carsModel.mapTag
+
+
+            gasStation.text = carsModel.gasStation
+            airCondition.text = carsModel.airCondition
+            price.text = "$" + carsModel.price + " / day"
         }
     }
 
