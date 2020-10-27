@@ -26,4 +26,6 @@
     <string name="low_to_high">По возрастанию</string>
     <string name="check_rent_label">Check Rent</string>
     <string name="search">Search</string>
+    <string name="time_remaining_until_travel">Your trip starts in: </string>
+    <string name="save_your_money_book_now">Save your money, book now!</string>
 </resources>

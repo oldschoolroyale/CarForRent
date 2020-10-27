@@ -85,13 +85,64 @@
             app:spinning_bar_padding="6dp"
             android:layout_marginTop="16dp" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fragmentListTimeToTravelCardView"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:visibility="gone"
+            app:cardCornerRadius="8dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/fragmentListAnimButtonSearch">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="3"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/time_remaining_until_travel"
+                    android:textSize="14sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_baseline_timer_24"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/fragmentListTimeTextView"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/colorAccent"
+                        />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="@string/save_your_money_book_now"
+                    android:textSize="14sp"
+                    android:gravity="end"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/fragmentListRecyclerView"
-            android:layout_below="@id/fragmentListAnimButtonSearch"
+            android:layout_below="@id/fragmentListTimeToTravelCardView"
             android:layout_marginTop="10dp"/>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -99,7 +150,7 @@
             android:orientation="vertical"
             android:id="@+id/fragmentListEmpty"
             android:gravity="center"
-            android:layout_below="@id/fragmentListAnimButtonSearch"
+            android:layout_below="@id/fragmentListTimeToTravelCardView"
             android:layout_marginTop="20dp">
             <ImageView
                 android:layout_width="128dp"
@@ -120,6 +171,7 @@
                 android:text="@string/try_again_later"
                 android:textSize="15sp"/>
         </LinearLayout>
+
     </RelativeLayout>
 
 

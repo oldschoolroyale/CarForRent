@@ -28,6 +28,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_list.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ListFragment : MvpAppCompatFragment(), CarsView{
@@ -76,9 +79,12 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
         }
 
         materialDatePicker.addOnPositiveButtonClickListener {
+            Log.d("MyLog", it.toString())
             val model = it.toString().split(" ")
             listViewModel.datePick(model)
             subscribeOnTotalCount( model)
+            view.fragmentListTimeToTravelCardView.visibility = View.VISIBLE
+            subscribeOnDownCounter(view, model)
         }
 
         val dateFromLiveData : LiveData<String> = listViewModel.getDateFrom()
@@ -113,6 +119,15 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
                 Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 Log.d("MyLog", "Rx $it")
             }))
+    }
+
+    private fun subscribeOnDownCounter(view: View, model: List<String>){
+        compositeDisposable.add(listViewModel.countDown(model)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                view.fragmentListTimeTextView.text = it.toString()
+            })
     }
 
     override fun startLoading() {
@@ -171,7 +186,7 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         compositeDisposable.dispose()
+        super.onDestroyView()
     }
 }
