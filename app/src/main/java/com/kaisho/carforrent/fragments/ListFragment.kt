@@ -25,6 +25,8 @@ import com.kaisho.carforrent.viewModel.ListViewModel
 import com.kaisho.carforrent.viewModel.SharedViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 import kotlinx.android.synthetic.main.fragment_list.view.*
@@ -50,6 +52,8 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
     private lateinit var loader: CircularProgressButton
     private lateinit var emptyList: LinearLayout
     private var adapter = CarAdapter(this)
+
+    private lateinit var observer: DisposableObserver<String>
 
     @InjectPresenter
     lateinit var presenter: CarsPresenter
@@ -83,8 +87,8 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
             val model = it.toString().split(" ")
             listViewModel.datePick(model)
             subscribeOnTotalCount( model)
-            view.fragmentListTimeToTravelCardView.visibility = View.VISIBLE
-            subscribeOnDownCounter(view, model)
+           // view.fragmentListTimeToTravelCardView.visibility = View.VISIBLE
+           // subscribeOnDownCounter(view, model)
         }
 
         val dateFromLiveData : LiveData<String> = listViewModel.getDateFrom()
@@ -128,6 +132,13 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
             .subscribe {
                 view.fragmentListTimeTextView.text = it.toString()
             })
+
+      /* compositeDisposable.add(listViewModel.countDown(model)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                view.fragmentListTimeTextView.text = it.toString()
+            })*/
     }
 
     override fun startLoading() {
@@ -186,7 +197,7 @@ class ListFragment : MvpAppCompatFragment(), CarsView{
     }
 
     override fun onDestroyView() {
-        compositeDisposable.dispose()
+        observer.dispose()
         super.onDestroyView()
     }
 }

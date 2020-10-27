@@ -12,6 +12,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.observers.DisposableObserver
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -63,6 +64,7 @@ class ListViewModel : ViewModel() {
         }, BackpressureStrategy.BUFFER)
 
     }
+
 
     fun countDown(model: List<String>) : Observable<String>{
 
